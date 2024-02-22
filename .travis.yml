@@ -1,0 +1,11 @@
+sudo: require # For Docker
+
+services:
+  - docker
+
+# Preconditions before tests/build/etc
+before_install:
+  - docker build -f Dockerfile.dev -t nd:travis-ci-docker-react .
+
+script:
+  - docker run -e CI=true nd:travis-ci-docker-react npm run test
